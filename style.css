@@ -1,0 +1,373 @@
+/*-----------------  GOOGLE FONTS  -----------------*/
+@import url('https://fonts.googleapis.com/css2?family=PT+Serif&display=swap');
+
+/*-----------------  VARIABLES  -----------------*/
+:root {
+    /* Colors */ 
+    --white_color : rgb(255, 255, 255);
+    --orange_color: rgb(246, 99, 53);
+    --green_color: rgb(0, 128, 0);
+    --body_background: rgb(27, 31, 41);
+    --disabled_color: rgb(128, 128, 128);
+}
+/*-----------------  BASE  -----------------*/
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: 'PT Serif', serif;
+}
+/*-----------------  STYLING  -----------------*/
+  body {
+    background:var(--body_background);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo img{
+    width: 20em;
+    height: 20em;
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+  } 
+  .container {
+    width:100vw;
+    display: flex;
+    margin: 15em 0 5em 0;
+    align-items: flex-start;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+  }
+
+  /* QR Code Reader */
+
+  .reader_box{
+    height: 16.875em;
+    position: relative;
+    width:26.25em;
+    border-radius:0.4375em;
+    margin: 0 1em 0 1em;
+    background:var(--orange_color);
+    padding: 1em ;
+    transition: height 0.2s ease;
+    box-shadow: 0 0.625em 1.25em rgba(0,0,0,0.1);
+  }
+  .reader_box::before{
+    content:'QR Reader';
+    position: absolute;
+    font-size: 2em;
+    font-weight: 700;
+    top:-2.5em;
+    left:4em ;
+    color:var(--white_color);
+  }
+  .reader_box.active{
+    height:32.812em;
+  }
+  .drop_active {
+    border: 0.2em dashed var(--orange_color);
+  }
+  .reader_box form{
+    height:15em;
+    display: flex;
+    cursor: pointer;
+    user-select: none;
+    text-align: center;
+    background: var(--white_color);
+    align-items: center;
+    justify-content: center;
+    transition: height 0.2s ease;
+  }
+  .reader_box.active form{
+    height:14.0625em;
+    pointer-events: none;
+  }
+  form img{
+    display: none;
+    max-width: 9.25em;
+  }
+  .reader_box.active form img{
+    display: block;
+  }
+  .reader_heading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .reader_box.active form .reader_heading{
+    display: none;
+  }
+  form .reader_heading i{
+    color: var(--orange_color);
+    font-size:3.4375em;
+  }
+  form .reader_heading p{
+    color: var(--orange_color);
+    margin-top:0.9375em;
+    font-size: 1em;
+  }
+  .reader_box .reader_result{
+    opacity: 0;
+    margin-top: 1.5625em;
+    pointer-events: none;
+  }
+  .reader_box.active .reader_result{
+    opacity: 1;
+    pointer-events: auto;
+    transition: opacity 0.5s 0.05s ease;
+  }
+  .reader_result textarea{
+    width: 100%;
+    height: 8em;
+    outline: none;
+    resize: none;
+    color: var(--white_color);
+    font-size: 1.125em;
+    background: none;
+    border-radius: 0.3125em;
+    padding: 0.625em 0.9375em;
+    border: 0.0625em solid var(--white_color);
+  }
+  textarea::-webkit-scrollbar{
+    width: 0em;
+  }
+  textarea:hover::-webkit-scrollbar{
+    width: 0.3125em;
+  }
+  textarea:hover::-webkit-scrollbar-track{
+    background: none;
+  }
+  textarea:hover::-webkit-scrollbar-thumb{
+    background: var(--white_color);
+    border-radius: 0.5em;
+  }
+  .reader_result .reader_buttons{
+    display: flex;
+    margin-top: 1.25em;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .reader_buttons button{
+    height: 3.4375em;
+    outline: none;
+    border: none;
+    font-weight: 500;
+    font-size: 1em;
+    cursor: pointer;
+    color: var(--orange_color);
+    border-radius: 0.3125em;
+    background: var(--white_color);
+    transition: transform 0.3s ease;
+    width: calc(100% / 2 - 0.625em);
+  }
+  .reader_buttons button:hover {
+    color: var(--white_color);
+    background-color: var(--orange_color);
+    font-weight: bold;
+    border: 0.0625em solid var(--white_color);
+    border-radius: 0.3125em;
+  }
+  .reader_buttons button:active{
+    transform: scale(0.95);
+  }
+  #loader {
+    background: #000 url(images/loader.gif) no-repeat center center;
+    background-size:cover;
+    z-index: 100;
+    width:7em;
+    height:7em;
+    display: none;
+  }
+  /* End QR Code Reader */
+
+  /* QR Code Generator */
+
+  .generator_box {
+    background-color: var(--white_color);
+    height: auto;
+    margin: 0 1em 0 1em;
+    padding: 0em 3em 0em 3em;
+    width: 28em;
+    border: 1em solid var(--orange_color);
+    border-radius: 0.6em;
+    box-shadow: 0 1.5em 3em rgba(3, 21, 55, 0.3);
+  }
+  .generator_box::before{
+    content:'QR Generator';
+    position: relative;
+    font-size: 2em;
+    font-weight: 700;
+    top:-3em;
+    left:2em ;
+    color: var(--white_color);
+  }
+  #userInput {
+    width: 100%;
+    border: none;
+    color: var(--orange_color);
+    border-bottom: 0.125em solid var(--orange_color);
+    padding: 0.5em 0.5em;
+    font-size: 1em;
+    outline: none;
+  }
+  ::placeholder{
+    opacity: 1;
+    color: var(--orange_color);
+  }
+  .generator_buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+  .generator_buttons button,
+  .generator_buttons a {
+    font-size: 1em;
+    padding: 0.8em 2em;
+    border-radius: 0.5em;
+    margin: 2.1em 0.5em 2.6em 0.5em;
+  }
+  .generator_buttons a:hover{
+    font-weight: bold;
+    transition: 0.5s;
+  }
+  #submitBtn:disabled {
+    background-color: transparent;
+    color:var(--disabled_color);
+    border: 0.18em solid var(--disabled_color);
+    pointer-events: none;
+  }
+  .generator_buttons button {
+    background-color: transparent;
+    color: var(--orange_color);
+    border: 0.18em solid var(--orange_color);
+  }
+  .generator_buttons button:hover {
+    background-color: var(--orange_color);
+    color:var(--white_color);
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .generator_buttons a {
+    background-color: var(--orange_color);
+    color: var(--white_color);
+    text-decoration: none;
+    border: 0.18em solid var(--orange_color);
+  }
+  .show_qr {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.8em;
+  }
+  .hide {
+    display: none;
+  }
+
+  /* End QR Code Generator */
+
+  /* Toast Notification */
+
+  #toastBox {
+    position: absolute;
+    color: var(--green_color);
+    bottom:0;
+    left: 1.25em;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 1.25em;
+  }
+  .toast {
+    width: 12.5em;
+    height: 4.375em;
+    background: var(--white_color);
+    font-weight: bold;
+    margin: 0.9375em 0;
+    box-shadow: 0 0 1.25em rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    position: relative;
+    transform: translateX(-100%);
+    animation: moveright 0.5s linear forwards;
+  }
+  @keyframes moveright {
+    100%{
+      transform: translateX(0);
+    }
+  }
+  .toast i {
+    margin: 0 1.25em;
+    font-size: 2.1875em;
+    color:var(--green_color);
+  }
+  .toast::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0%;
+    height: 0.3125em;
+    background: var(--green_color);
+    animation: anim 3s linear forwards;
+  }
+  @keyframes anim {
+    100%{
+      width: 100%;
+    }
+  }
+  /* End Toast Notification */
+
+  /* For Responsive */
+
+  @media screen and (max-width: 931px) {
+    .reader_box {
+      margin: 5em 1em 8em 1em;
+    }
+  }
+
+  @media screen and (max-width: 450px) {
+    .logo img{
+      width: 16em;
+      height: 16em;
+    } 
+    .reader_box {
+      padding: 0.7em;
+      height: 16.25em;
+    }
+    .reader_box.active{
+      height: 32.5em;
+    }
+    .reader_box::before {
+      left:3em;
+    }
+    .generator_box {
+      padding: 0em 0.5em 0em 0.5em;
+      border: 0.5em solid var(--orange_color);
+    }
+    .generator_box::before {
+      left:2em;
+    }
+  }
+  @media screen and (max-width: 350px) {
+    .reader_box::before {
+      left:2em;
+    }
+   .generator_box::before {
+      left:1em;
+   } 
+   .generator_buttons button,
+   .generator_buttons a {
+    font-size: 0.8em;
+    padding: 0.5em 1em;
+    margin: 2em 0.5em 1.6em 0.5em;
+   }
+   .show_qr img {
+      width: 12.5em;
+      height: 12.5em;
+   }
+  }
+  

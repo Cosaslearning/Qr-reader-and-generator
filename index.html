@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Reader And Generator | Cosas Learning</title>
+    <!--- QR Code Generator CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <!-- Font Awesome CDN  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div class="logo">
+    <img src="/images/logo.png" alt="Logo">
+  </div>
+  <div class="container">
+   <!-- QR Reader -->
+   <div class="reader_box">
+    <form action="#">
+      <input type="file" hidden>
+      <img src="#" alt="qr-code">
+      <div class="reader_heading">
+        <i class="fas fa-cloud-upload"></i>
+        <p>Click To Choose Or<br>Drop QR Code To Read</p>
+        <div id="loader"></div>
+      </div>
+    </form>
+    <div class="reader_result">
+      <textarea spellcheck="false" disabled></textarea>
+      <div class="reader_buttons">
+        <button class="closeBtn">Close</button>
+        <button class="copyBtn" onclick="showToast()">Copy Text</button>
+      </div>
+    </div>
+  </div>
+  <!-- QR Generator -->
+  <div class="generator_box">
+    <input type="text" id="userInput" placeholder="Enter some text or URL" />
+    <div class="show_qr"></div>
+    <div class="generator_buttons">
+      <button id="submitBtn" disabled>Generate</button>
+      <button id="cancelBtn">Cancel</button>
+      <a href="#" id="downloadBtn">Download</a>
+    </div>
+    </div>
+  </div>
+  <!-- Toast Notification -->
+  <div id="toastBox"></div>
+  <!-- Script -->
+  <script src="script.js"></script>
+</body>
+</html>
